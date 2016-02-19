@@ -121,14 +121,6 @@ public class UrlModelViewController {
 		} else {
 			invalidUrl.set(true);
 		}
-//		if (txtUrl.getText() != null && txtUrl.getText().matches("(?i)\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|"
-//				+ "www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]"
-//				+ "+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)"
-//				+ "|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))")) {
-//			invalidUrl.set(false);
-//		} else {
-//			invalidUrl.set(true);
-//		}
 	}
 	protected void setUrlModel(UrlModel urlModel) {
 		this.urlModel = urlModel;
@@ -148,7 +140,6 @@ public class UrlModelViewController {
 					listLinks.scrollTo(0);
 				}
 			}
-			
 		});
 	}
 }
