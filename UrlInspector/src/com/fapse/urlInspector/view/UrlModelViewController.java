@@ -98,7 +98,6 @@ public class UrlModelViewController {
 		alert.setHeaderText(errorMessage);
 		alert.setContentText("Bitte neue URL eingeben");
 		alert.showAndWait();
-		
 	}
 	
 	private void expandUrlInput() {
@@ -131,10 +130,6 @@ public class UrlModelViewController {
 			@Override
 			public void changed(ObservableValue<? extends ObservableList<String>> observable,
 					ObservableList<String> oldValue, ObservableList<String> newValue) {
-				if(!oldValue.isEmpty()) {
-					listLinks.setItems(readOnlyListWrapper);
-					listLinks.scrollTo(0);					
-				}
 				if(!newValue.isEmpty()) {
 					listLinks.setItems(readOnlyListWrapper);
 					listLinks.scrollTo(0);
