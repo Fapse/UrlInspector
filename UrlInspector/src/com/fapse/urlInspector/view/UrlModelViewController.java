@@ -111,14 +111,24 @@ public class UrlModelViewController {
 
 	@FXML
 	private void validateUrlInput() {
-		if (txtUrl.getText() != null && txtUrl.getText().matches("(?i)\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|"
-				+ "www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]"
-				+ "+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)"
-				+ "|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))")) {
+		// Regex pattern for matching URLs by John Gruber,
+		// found on http://daringfireball.net/2010/07/improved_regex_for_matching_urls
+		if (txtUrl.getText() != null && txtUrl.getText().matches("(?i)\\b((?:https?://|"
+				+ "www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+"
+				+ "|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|"
+				+ "[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))")) {
 			invalidUrl.set(false);
 		} else {
 			invalidUrl.set(true);
 		}
+//		if (txtUrl.getText() != null && txtUrl.getText().matches("(?i)\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|"
+//				+ "www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]"
+//				+ "+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)"
+//				+ "|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))")) {
+//			invalidUrl.set(false);
+//		} else {
+//			invalidUrl.set(true);
+//		}
 	}
 	protected void setUrlModel(UrlModel urlModel) {
 		this.urlModel = urlModel;
