@@ -1,8 +1,5 @@
 package com.fapse.urlInspector.view;
 
-import java.net.MalformedURLException;
-import java.net.UnknownHostException;
-
 import com.fapse.urlInspector.enrichableException.EnrichableException;
 import com.fapse.urlInspector.model.UrlModel;
 
@@ -14,11 +11,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -36,11 +31,11 @@ public class UrlModelViewController {
 	private void initialize() {
 		btnStart.disableProperty().bind(invalidUrl);
 		listLinks.getSelectionModel().selectedItemProperty().addListener(
-				(ObservableValue<? extends String> ov, String o, String n) -> {
-					if (n != null) {
-						txtUrl.setText(n);						
-					}
+			(ObservableValue<? extends String> ov, String o, String n) -> {
+				if (n != null) {
+					txtUrl.setText(n);						
 				}
+			}
 		);
 		btnStart.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
 			@Override
@@ -79,27 +74,11 @@ public class UrlModelViewController {
 			try {
 				urlModel.inspectUrl(txtUrl.getText());
 			} catch (EnrichableException e) {
-				handleEnrichableException(e);
+				new ExceptionAlert(e);
 			}
 		}
 	}
-	
-	private void handleEnrichableException(EnrichableException e) {
-		String errorMessage = "";
-		if (e.getCause() instanceof MalformedURLException) {
-			errorMessage = "URL in ungültigem Format eingegeben";
-		} else if (e.getCause() instanceof UnknownHostException) {
-			errorMessage = "URL konnte nicht gefunden werden";
-		} else {
-			errorMessage = "Neue Fehlermeldung: " + e.getCause();
-		}
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Fehler");
-		alert.setHeaderText(errorMessage);
-		alert.setContentText("Bitte neue URL eingeben");
-		alert.showAndWait();
-	}
-	
+		
 	private void expandUrlInput() {
 		StringBuilder urlInput = new StringBuilder(txtUrl.getText());
 		if (urlInput.length() > 0 && urlInput.indexOf("http://") != 0) {
@@ -121,12 +100,13 @@ public class UrlModelViewController {
 			invalidUrl.set(true);
 		}
 	}
+	
 	protected void setUrlModel(UrlModel urlModel) {
 		this.urlModel = urlModel;
 	}
+	
 	protected void setLinkList(ReadOnlyListWrapper<String> readOnlyListWrapper) {
 		readOnlyListWrapper.addListener(new ChangeListener<ObservableList<String>>() {
-
 			@Override
 			public void changed(ObservableValue<? extends ObservableList<String>> observable,
 					ObservableList<String> oldValue, ObservableList<String> newValue) {
