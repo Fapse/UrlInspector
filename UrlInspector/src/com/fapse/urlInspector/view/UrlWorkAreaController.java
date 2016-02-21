@@ -18,7 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-public class UrlModelViewController {
+public class UrlWorkAreaController {
 	private BooleanProperty invalidUrl = new SimpleBooleanProperty(true);
 	private UrlModel urlModel;
 	@FXML
